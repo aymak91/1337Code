@@ -1,5 +1,5 @@
 import { authModalState } from '@/atoms/authModalAtom';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import {auth} from '@/firebase/firebase'
@@ -45,6 +45,10 @@ const Login:React.FC<LoginProps> = () => {
         }
     }    
 
+    useEffect(() => {
+        if (error) alert(error.message);
+    }, [error]);
+    
     console.log(user, "user")
 
     return (
@@ -63,7 +67,7 @@ const Login:React.FC<LoginProps> = () => {
                 <input onChange={onHandleInputChange} type="password" name='password' id='password' placeholder='Password' className='border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white' />
             </div>
             <button type="submit" className='w-full text-white focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-brand-orange hover:bg-brand-orange-s'>
-                Login
+                {loading ? "Loading" : "Login"}
             </button>
             <button className='flex w-full justify-end'>
                 <a href='#' className='text-sm block text-brand-orange hover:underline w-full text-right'
