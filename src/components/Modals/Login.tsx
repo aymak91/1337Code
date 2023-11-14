@@ -50,8 +50,6 @@ const Login:React.FC<LoginProps> = () => {
         if (error) toast.error(error.message, {position: "top-center", autoClose: 3000, theme: "dark"});
     }, [error]);
     
-    console.log(user, "user")
-
     return (
         <form action="" className='space-y-6 px-6 py-4' onSubmit={handleLogin}>
             <h3 className='text-xl font-medium text-white'>Sign into 1337Clone</h3>

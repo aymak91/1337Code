@@ -16,6 +16,7 @@
     "@types/react-dom": "18.2.14",
     "@uiw/codemirror-theme-vscode": "^4.21.20",
     "@uiw/react-codemirror": "^4.21.20",
+    "assert": "^2.1.0",
     "eslint": "8.53.0",
     "eslint-config-next": "14.0.1",
     "firebase": "^10.5.2",
