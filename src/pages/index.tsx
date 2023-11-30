@@ -3,6 +3,7 @@ import Topbar from "@/components/Topbar/Topbar"
 import { useState } from "react"
 import {firestore} from '@/firebase/firebase'
 import {doc, setDoc} from 'firebase/firestore'
+import useHasMounted from '@/hooks/useHasMounted'
 
 const LoadingSkeleton = () => {
 	return (
@@ -50,6 +51,10 @@ export default function Home() {
   // }
 
   // // --------------------------------------------------
+
+  // resolves hydration issues
+  const hasMounted = useHasMounted();
+  if (!hasMounted) return null;
   
   const [loadingProblems, setLoadingProblems] = useState(true);
   
