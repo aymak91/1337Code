@@ -100,12 +100,12 @@ const Signup:React.FC<SignupProps> = () => {
                     Log In
                 </a>
             </div>
-            <div className='text-sm font-medium text-gray-300'>
+            {/* <div className='text-sm font-medium text-gray-300'>
                 Or try logging in with a demo account! {" "}
                 <a href='#' className='text-blue-700 hover:underline'>
                     Demo Login
                 </a>
-            </div>
+            </div> */}
         </form>
     )
 }

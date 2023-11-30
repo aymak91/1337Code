@@ -33,18 +33,21 @@ const Login:React.FC<LoginProps> = () => {
         setInputs((prev) => ({...prev, [e.target.name]: e.target.value}))
     }
 
-    const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {
+    const handleLogin = async (e:React.FormEvent<HTMLFormElement>, demo=false) => {
         e.preventDefault();
-        if (!inputs.email || !inputs.password) return toast.error("Please fill in all fields", {position: "top-center", autoClose: 3000, theme: "dark"});
+        const email = demo ? 'charmander@gmail.com' : inputs.email;
+        const password = demo ? '123456' : inputs.password;
+
+        if (!email || !password) return toast.error("Please fill in all fields", {position: "top-center", autoClose: 3000, theme: "dark"});
 
         try {
-            const newUser = await signInWithEmailAndPassword(inputs.email, inputs.password)
+            const newUser = await signInWithEmailAndPassword(email, password)
             if (!newUser) return;
             router.push("/")
         } catch (error: any) {
             toast.error(error.message, {position: "top-center", autoClose: 3000, theme: "dark"});
         }
-    }    
+    }
 
     useEffect(() => {
         if (error) toast.error(error.message, {position: "top-center", autoClose: 3000, theme: "dark"});
@@ -83,7 +86,7 @@ const Login:React.FC<LoginProps> = () => {
             </div>
             <div className='text-sm font-medium text-gray-300'>
                 Or try logging in with a demo account! {" "}
-                <a href='#' className='text-blue-700 hover:underline'>
+                <a href='#' className='text-blue-700 hover:underline' onClick={(e:any) => handleLogin(e, true)}>
                     Demo Login
                 </a>
             </div>
