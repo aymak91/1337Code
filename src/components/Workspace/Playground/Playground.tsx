@@ -38,18 +38,23 @@ const Playground:React.FC<PlaygroundProps> = ({problem, setSuccess}) => {
 
         try {
             const cb = new Function(`return ${userCode}`)();
-            const success = problems[pid as string].handlerFunction(cb);
-            if (success) {
-                toast.success("You passed all test cases! Great job!", {
-                    position: 'top-center',
-                    autoClose: 3000,
-                    theme: 'dark',
-                })
-                setSuccess(true);
-                setTimeout(() => {
-                    setSuccess(false);
-                },4000)
+            const handler = problems[pid as string].handlerFunction;
+
+            if (typeof handler === "function") {
+                const success = handler(cb)
+                if (success) {
+                    toast.success("You passed all test cases! Great job!", {
+                        position: 'top-center',
+                        autoClose: 3000,
+                        theme: 'dark',
+                    })
+                    setSuccess(true);
+                    setTimeout(() => {
+                        setSuccess(false);
+                    },4000)
+                }
             }
+
         } catch (error:any) {
             if (error.message.startsWith("AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:")) {
                 toast.error(`One or more test cases failed! ${error.message}`, {
