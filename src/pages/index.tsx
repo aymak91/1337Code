@@ -53,10 +53,10 @@ export default function Home() {
   // // --------------------------------------------------
 
   // resolves hydration issues
+  const [loadingProblems, setLoadingProblems] = useState(true);
   const hasMounted = useHasMounted();
   if (!hasMounted) return null;
   
-  const [loadingProblems, setLoadingProblems] = useState(true);
   
   return (
     <>
